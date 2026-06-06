@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Swing Trading Analysis On Gap Up/Down Trading</title>
+
+<style>
+body {
+    font-family: "Segoe UI", sans-serif;
+    background: linear-gradient(to right, #141E30, #243B55);
+    color: white;
+}
+.card {
+    width: 800px;
+    margin: 30px auto;
+    background: #ffffff;
+    color: #000;
+    border-radius: 14px;
+    padding: 25px;
+    box-shadow: 0 20px 45px rgba(0,0,0,0.4);
+}
+h2 { text-align:center; color:#243B55; }
+
+select, button {
+    padding: 8px;
+    margin: 8px 0;
+}
+
+table {
+    width: 100%;
+    margin-top: 15px;
+    border-collapse: collapse;
+}
+td, th {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+.good { color: green; font-weight: bold; }
+.bad { color: red; font-weight: bold; }
+
+.bar {
+    width: 100%;
+    background: #eee;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.fill {
+    height: 16px;
+    background: linear-gradient(to right, #00c853, #64dd17);
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+<h2>📊 ML Directional Gap Trading</h2>
+<form method="POST">
+
+    <label>Date (Pseudo only):</label>
+    <select name="date">
+        {% for d in dates %}
+        <option value="{{ d }}" {% if d == selected %}selected{% endif %}>{{ d }}</option>
+        {% endfor %}
+    </select>
+
+    <button type="submit">Predict</button>
+</form>
+
+
+
+<table>
+<tr><td><b>Direction</b></td><td>{{ direction }}</td></tr>
+<tr><td>XGBoost</td><td class="{{ 'good' if xgb=='BUY' else 'bad' }}">{{ xgb }}</td></tr>
+<tr><td>RandomForest</td><td class="{{ 'good' if rf=='BUY' else 'bad' }}">{{ rf }}</td></tr>
+<tr><td>LogReg Probability</td><td>{{ prob }}</td></tr>
+
+<tr>
+<td>Confidence</td>
+<td>
+<div class="bar"><div class="fill" style="width: {{ prob_pct }}%"></div></div>
+</td>
+</tr>
+
+<tr><td><b>Final Signal</b></td>
+<td class="{{ 'good' if trade=='YES' else 'bad' }}">{{ signal }}</td></tr>
+
+<tr><td>Trade Allowed</td><td>{{ trade }}</td></tr>
+<tr><td>Entry</td><td>{{ entry }}</td></tr>
+<tr><td>Target</td><td>{{ target }}</td></tr>
+<tr><td>Stop</td><td>{{ stop }}</td></tr>
+</table>
+
+<h3>📜 Last 10 Predictions</h3>
+<table>
+<tr><th>Date</th><th>Dir</th><th>XGB</th><th>RF</th><th>Prob</th><th>Signal</th></tr>
+{% for r in history %}
+<tr>
+<td>{{ r.Date }}</td>
+<td>{{ r.Direction }}</td>
+<td>{{ r.XGB }}</td>
+<td>{{ r.RF }}</td>
+<td>{{ r.Prob }}</td>
+<td>{{ r.Signal }}</td>
+</tr>
+{% endfor %}
+</table>
+
+</div>
+</body>
+</html>

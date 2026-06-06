@@ -1,0 +1,75 @@
+# Python caches
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+env/
+.venv/
+ENV/
+
+# Python packaging
+build/
+dist/
+*.egg-info/
+pip-wheel-metadata/
+
+# IDE/editor
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln
+
+# Logs and temp files
+*.log
+*.tmp
+*.bak
+
+# Test and type caches
+.pytest_cache/
+.mypy_cache/
+.coverage
+
+# Environment files
+.env
+.env.*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Model artifacts and serialized objects
+src/models/
+*.pkl
+*.joblib
+
+# Generated plots and images
+src/plots/
+*.png
+*.jpg
+
+# Generated reports and runtime outputs
+src/reports/pseudo_live_trades.csv
+src/reports/trades.csv
+src/reports/summary.csv
+reports/prediction_log.csv
+
+# Local data folders (adjust if you want to track these)
+src/data/
+src/src/data/
+src/swing_proj/src/data/
+
+# Coverage and build artifacts
+htmlcov/
+.coverage
+
+# Other
+*.pyc
+
+# End of file
